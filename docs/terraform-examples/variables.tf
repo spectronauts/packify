@@ -33,7 +33,7 @@ variable "registry_name" {
 variable "registry_endpoint" {
   description = "Artifactory base URL, scheme included, with no API path."
   type        = string
-  default     = "https://artifactory.teams.spectrocloud.com"
+  default     = "https://artifactory.teams.jfrog.com"
 }
 
 variable "registry_endpoint_suffix" {

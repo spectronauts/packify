@@ -13,7 +13,7 @@ registry_token    = "<artifactory-identity-token>"
 
 # Defaults below match the packify demo. Override as needed.
 # registry_name              = "jarvis-pack-registry"
-# registry_endpoint          = "https://artifactory.teams.spectrocloud.com"
+# registry_endpoint          = "https://artifactory.teams.jfrog.com"
 # registry_endpoint_suffix   = "/artifactory/api/docker/jarvis-pack-manifests"
 # registry_base_content_path = "pavan-packs"
 

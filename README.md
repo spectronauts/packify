@@ -104,11 +104,11 @@ Build a CRD pack and push it in one go:
     bash ./manifestify.sh -n prometheus-operator-crds -v 0.76.2 \
       -p addon -a monitoring -s monitoring \
       -m ./.manifests/crd -d "Prometheus Operator CRDs" -r README.md \
-      -R artifactory.teams.spectrocloud.com/jarvis-pack-manifests/pavan-packs -L -P
+      -R artifactory.teams.jfrog.com/jarvis-pack-manifests/pavan-packs -L -P
 
 `-R` takes the host and repository path only; the script appends `spectro-packs/archive/<name>:<version>`, so that pushes to:
 
-    artifactory.teams.spectrocloud.com/jarvis-pack-manifests/pavan-packs/spectro-packs/archive/prometheus-operator-crds:0.76.2
+    artifactory.teams.jfrog.com/jarvis-pack-manifests/pavan-packs/spectro-packs/archive/prometheus-operator-crds:0.76.2
 
 ### Manifest order -
 `kubeManifests` is written in collection order, and Palette applies the manifests in that order. Directory collection is sorted by filename. When order matters, such as CRDs before the custom resources that use them, list the files explicitly with repeated `-m` flags or with `-f`:

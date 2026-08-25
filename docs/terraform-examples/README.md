@@ -75,8 +75,8 @@ the same artifact.
 
 | Used by | Value |
 |---|---|
-| `oras push` | `artifactory.teams.spectrocloud.com/jarvis-pack-manifests/pavan-packs` |
-| `endpoint` + `endpoint_suffix` | `https://artifactory.teams.spectrocloud.com` + `/artifactory/api/docker/jarvis-pack-manifests` |
+| `oras push` | `artifactory.teams.jfrog.com/jarvis-pack-manifests/pavan-packs` |
+| `endpoint` + `endpoint_suffix` | `https://artifactory.teams.jfrog.com` + `/artifactory/api/docker/jarvis-pack-manifests` |
 | `base_content_path` | `pavan-packs` |
 
 oras is a Docker V2 client and always requests `/v2/<repo>/…`. Artifactory's
