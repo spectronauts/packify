@@ -1,0 +1,3 @@
+.manifests
+*.tar.gz
+.DS_Store
