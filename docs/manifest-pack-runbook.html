@@ -649,7 +649,11 @@ manifests:
     <p class="measure">An optional top-level block, a sibling of <code>pack:</code> and <code>manifests:</code> rather than a child of either. It tells Palette to wait until a resource reports a given state before treating the pack as deployed, which is how you stop the next pack in a profile from starting too early.</p>
 
     <div class="code">
-      <div class="code-label">values.yaml &mdash; waiting for CRDs to be established</div>
+      <div class="code-label tablist" role="tablist" aria-label="Readiness check examples">
+        <button type="button" role="tab" id="tab-rc-crd" aria-controls="panel-rc-crd" aria-selected="true">CRD established</button>
+        <button type="button" role="tab" id="tab-rc-deploy" aria-controls="panel-rc-deploy" aria-selected="false" tabindex="-1">Deployment available</button>
+      </div>
+      <div id="panel-rc-crd" role="tabpanel" aria-labelledby="tab-rc-crd" tabindex="0">
 <pre>pack:
   namespace: monitoring
 
@@ -658,13 +662,32 @@ readinessCheck:                <span class="c"># top level, not under pack:</spa
     - name: <span class="s">"prometheuses-crd"</span>
       kind: <span class="s">"CustomResourceDefinition"</span>
       group: <span class="s">"apiextensions.k8s.io"</span>
-      version: <span class="s">"v1"</span>
+      version: <span class="s">"v1"</span>   <span class="c"># cluster-scoped, so no namespace</span>
       keysToCheck:
         - keyToCheck: <span class="s">"status.conditions[0].status"</span>
           expectedValue: <span class="s">"True"</span>
 
 manifests:
   crd-prometheuses: {}</pre>
+      </div>
+      <div id="panel-rc-deploy" role="tabpanel" aria-labelledby="tab-rc-deploy" tabindex="0" hidden>
+<pre>pack:
+  namespace: monitoring
+
+readinessCheck:
+  v1beta1:
+    - name: <span class="s">"prometheus-operator"</span>
+      namespace: <span class="s">"monitoring"</span>   <span class="c"># namespaced, so it is required</span>
+      kind: <span class="s">"Deployment"</span>
+      group: <span class="s">"apps"</span>
+      version: <span class="s">"v1"</span>
+      keysToCheck:
+        - keyToCheck: <span class="s">"status.availableReplicas"</span>
+          expectedValue: <span class="s">"1"</span>
+
+manifests:
+  operator: {}</pre>
+      </div>
     </div>
 
     <p class="measure">Add <code>namespace</code> to an entry when the kind is namespaced. Cluster-scoped kinds, CRDs among them, omit it.</p>
