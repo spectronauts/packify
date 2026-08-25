@@ -1,0 +1,31 @@
+##################################################################################
+# Copy to terraform.tfvars and fill in. Never commit terraform.tfvars.
+##################################################################################
+
+# Palette - tenant-level key, the OCI registry is a tenant-scoped resource
+sc_host         = "api.spectrocloud.com"
+sc_api_key      = "<palette-api-key>"
+sc_project_name = "Default"
+
+# Artifactory - use an identity token, not an account password
+registry_username = "<artifactory-user>"
+registry_token    = "<artifactory-identity-token>"
+
+# Defaults below match the packify demo. Override as needed.
+# registry_name              = "jarvis-pack-registry"
+# registry_endpoint          = "https://artifactory.teams.spectrocloud.com"
+# registry_endpoint_suffix   = "/artifactory/api/docker/jarvis-pack-manifests"
+# registry_base_content_path = "pavan-packs"
+
+# Registry only on a first apply. Flip to true once the pack is indexed.
+create_profile = false
+
+# Profile scope. tenant makes the profile visible across every project.
+profile_context = "tenant"
+
+# pack_name    = "prometheus-operator-crds"
+# pack_version = "0.76.2"
+
+# Leave empty to create the registry and profile without deploying
+# cluster_uid     = "<cluster-uid>"
+# cluster_context = "project"
