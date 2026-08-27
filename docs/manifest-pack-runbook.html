@@ -1,0 +1,1239 @@
+<title>Manifest Pack Delivery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+
+<style>
+  :root {
+    --ground: #f6f7f9;
+    --surface: #ffffff;
+    --surface-sunk: #eceff3;
+    --ink: #10151c;
+    --ink-soft: #3c4653;
+    --muted: #5d6875;
+    --rule: #d9dee5;
+    --rule-soft: #e6eaef;
+    --accent: #0e7c86;
+    --accent-deep: #0a5b62;
+    --accent-wash: #e2f1f2;
+    --caution: #b45309;
+    --caution-wash: #fbf0e2;
+    --good: #15803d;
+    --good-wash: #e6f2ea;
+    --code-ground: #11181f;
+    --code-ink: #dbe4ec;
+    --code-muted: #7f8f9e;
+    --code-accent: #5cc8ce;
+    --code-string: #d3b58d;
+
+    --measure: 68ch;
+    --wide: 1080px;
+
+    --step-0: 0.75rem;
+    --step-1: 0.8125rem;
+    --step-2: 0.9375rem;
+    --step-3: 1.0625rem;
+    --step-4: 1.375rem;
+    --step-5: 1.75rem;
+    --step-6: 2.5rem;
+    --step-7: 3.25rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0e1216;
+      --surface: #161c22;
+      --surface-sunk: #1b232a;
+      --ink: #e8edf2;
+      --ink-soft: #c2cdd8;
+      --muted: #8d9aa8;
+      --rule: #2a343d;
+      --rule-soft: #222b33;
+      --accent: #3fb3b8;
+      --accent-deep: #6fd0d4;
+      --accent-wash: #10262a;
+      --caution: #e0932f;
+      --caution-wash: #2a2013;
+      --good: #4cae6f;
+      --good-wash: #13251a;
+      --code-ground: #0a0f14;
+      --code-ink: #dbe4ec;
+      --code-muted: #75838f;
+      --code-accent: #5cc8ce;
+      --code-string: #d3b58d;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0e1216;
+    --surface: #161c22;
+    --surface-sunk: #1b232a;
+    --ink: #e8edf2;
+    --ink-soft: #c2cdd8;
+    --muted: #8d9aa8;
+    --rule: #2a343d;
+    --rule-soft: #222b33;
+    --accent: #3fb3b8;
+    --accent-deep: #6fd0d4;
+    --accent-wash: #10262a;
+    --caution: #e0932f;
+    --caution-wash: #2a2013;
+    --good: #4cae6f;
+    --good-wash: #13251a;
+    --code-ground: #0a0f14;
+    --code-ink: #dbe4ec;
+    --code-muted: #75838f;
+    --code-accent: #5cc8ce;
+    --code-string: #d3b58d;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: var(--step-3);
+    line-height: 1.65;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: var(--wide);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 3rem);
+  }
+
+  .measure { max-width: var(--measure); }
+
+  h1, h2, h3, h4, .display {
+    font-family: Archivo, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  code, pre, kbd, .mono {
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    font-variant-ligatures: none;
+  }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--accent-deep); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface);
+  }
+  .masthead-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem);
+  }
+  .eyebrow {
+    font-family: Archivo, sans-serif;
+    font-size: var(--step-0);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  h1 {
+    font-size: clamp(2rem, 5.5vw, var(--step-7));
+    line-height: 1.05;
+    font-weight: 700;
+    margin: 0;
+    max-width: 22ch;
+  }
+  .standfirst {
+    font-size: var(--step-4);
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 54ch;
+  }
+
+  .meta-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 2.5rem;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 1.25rem;
+    margin-top: 0.5rem;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 0.15rem; }
+  .meta-label {
+    font-family: Archivo, sans-serif;
+    font-size: var(--step-0);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .meta-value { font-size: var(--step-2); color: var(--ink-soft); }
+
+  /* ---------- contents ---------- */
+
+  .contents {
+    background: var(--surface-sunk);
+    border-bottom: 1px solid var(--rule);
+    padding: 1.75rem 0;
+  }
+  .contents ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    gap: 0.6rem 2rem;
+    counter-reset: toc;
+  }
+  .contents li { counter-increment: toc; }
+  .contents a {
+    display: flex;
+    gap: 0.7rem;
+    align-items: baseline;
+    font-family: Archivo, sans-serif;
+    font-size: var(--step-2);
+    text-decoration: none;
+    color: var(--ink-soft);
+    padding: 0.2rem 0;
+  }
+  .contents a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .contents a:hover { color: var(--accent); }
+
+  /* ---------- steps ---------- */
+
+  main { padding: clamp(2.5rem, 6vw, 4.5rem) 0 6rem; }
+
+  .step { padding-block: clamp(2rem, 4vw, 3rem); border-top: 1px solid var(--rule); }
+  .step:first-of-type { border-top: 0; padding-top: 0; }
+
+  .step-head {
+    display: grid;
+    grid-template-columns: 3.25rem 1fr;
+    gap: 0 1rem;
+    align-items: start;
+    margin-bottom: 1.5rem;
+  }
+  .step-num {
+    font-family: Archivo, sans-serif;
+    font-size: var(--step-5);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.2rem;
+  }
+  .step-head h2 {
+    font-size: clamp(1.5rem, 3.2vw, var(--step-6));
+    line-height: 1.1;
+    margin: 0;
+    grid-column: 2;
+  }
+  .step-head .step-note {
+    grid-column: 2;
+    margin: 0.6rem 0 0;
+    color: var(--ink-soft);
+    max-width: var(--measure);
+  }
+
+  .step-body { padding-left: 0; }
+  @media (min-width: 720px) {
+    .step-body { padding-left: 4.25rem; }
+  }
+
+  h3 {
+    font-size: var(--step-4);
+    margin: 2.25rem 0 0.75rem;
+  }
+  h4 {
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 1.75rem 0 0.6rem;
+  }
+  p { margin: 0 0 1rem; max-width: var(--measure); }
+  ul, ol.prose { max-width: var(--measure); padding-left: 1.25rem; margin: 0 0 1rem; }
+  li { margin-bottom: 0.4rem; }
+
+  strong { font-weight: 600; }
+
+  p code, li code, td code {
+    background: var(--surface-sunk);
+    border: 1px solid var(--rule-soft);
+    border-radius: 3px;
+    padding: 0.08em 0.34em;
+    font-size: 0.86em;
+    color: var(--ink);
+    word-break: break-word;
+  }
+
+  /* ---------- code blocks ---------- */
+
+  .code {
+    background: var(--code-ground);
+    border-radius: 6px;
+    margin: 0 0 1.25rem;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .code-label {
+    font-family: Archivo, sans-serif;
+    font-size: var(--step-0);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--code-muted);
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-weight: 600;
+  }
+  .code pre {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    color: var(--code-ink);
+    font-size: var(--step-1);
+    line-height: 1.7;
+    tab-size: 2;
+  }
+  .code .c { color: var(--code-muted); font-style: italic; }
+  .code .k { color: var(--code-accent); }
+  .code .s { color: var(--code-string); }
+
+  /* ---------- tabbed code ---------- */
+
+  .tablist {
+    display: flex;
+    gap: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  .tablist button {
+    font-family: Archivo, sans-serif;
+    font-size: var(--step-0);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--code-muted);
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    transition: color 0.12s ease, border-color 0.12s ease;
+  }
+  .tablist button:hover { color: var(--code-ink); }
+  .tablist button[aria-selected="true"] {
+    color: var(--code-accent);
+    border-bottom-color: var(--code-accent);
+  }
+  .tablist button:focus-visible {
+    outline: 2px solid var(--code-accent);
+    outline-offset: -2px;
+  }
+  .code [role="tabpanel"][hidden] { display: none; }
+
+  /* ---------- callouts ---------- */
+
+  .note {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-wash);
+    padding: 0.9rem 1.1rem;
+    margin: 0 0 1.25rem;
+    max-width: var(--measure);
+    border-radius: 0 4px 4px 0;
+  }
+  .note.caution { border-left-color: var(--caution); background: var(--caution-wash); }
+  .note.good { border-left-color: var(--good); background: var(--good-wash); }
+  .note p { margin: 0; font-size: var(--step-2); }
+  .note p + p { margin-top: 0.5rem; }
+  .note-label {
+    font-family: Archivo, sans-serif;
+    font-size: var(--step-0);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .note.caution .note-label { color: var(--caution); }
+  .note.good .note-label { color: var(--good); }
+
+  /* ---------- tables ---------- */
+
+  .table-scroll { overflow-x: auto; margin: 0 0 1.25rem; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 480px;
+    font-size: var(--step-2);
+  }
+  th, td {
+    text-align: left;
+    padding: 0.6rem 1rem 0.6rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+  }
+  th {
+    font-family: Archivo, sans-serif;
+    font-size: var(--step-0);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    border-bottom-color: var(--rule);
+  }
+  td:last-child, th:last-child { padding-right: 0; }
+
+  /* ---------- flow diagram ---------- */
+
+  .flow { margin: 0 0 1.5rem; }
+  .flow svg { width: 100%; height: auto; display: block; }
+
+  /* ---------- demo timing ---------- */
+
+  .timing {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 0.5rem 1rem;
+    max-width: var(--measure);
+    margin: 0 0 1.5rem;
+    font-size: var(--step-2);
+  }
+  .timing dt {
+    font-family: "IBM Plex Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .timing dd { margin: 0; color: var(--ink-soft); }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2.5rem 0 4rem;
+    color: var(--muted);
+    font-size: var(--step-2);
+  }
+  footer p { max-width: var(--measure); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <p class="eyebrow">Customer handover &amp; demo runbook</p>
+    <h1>Manifest Pack Delivery</h1>
+    <p class="standfirst">Build a manifest-based pack from raw Kubernetes YAML, push it to JFrog Artifactory, register it in Palette with Terraform, and land it on a running cluster.</p>
+    <div class="meta-strip">
+      <div class="meta-item">
+        <span class="meta-label">Audience</span>
+        <span class="meta-value">Platform engineers</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Demo length</span>
+        <span class="meta-value">~20 minutes</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Tooling</span>
+        <span class="meta-value">manifestify &middot; oras &middot; Terraform</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Registry</span>
+        <span class="meta-value">JFrog Artifactory (basic OCI)</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="contents" aria-label="Contents">
+  <div class="wrap">
+    <ol>
+      <li><a href="#anatomy">Anatomy of a pack</a></li>
+      <li><a href="#build">Build the pack</a></li>
+      <li><a href="#push">Push to Artifactory</a></li>
+      <li><a href="#register">Register in Palette</a></li>
+      <li><a href="#sync">Sync and verify</a></li>
+      <li><a href="#profile">Create the profile</a></li>
+      <li><a href="#attach">Attach to a cluster</a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="measure" style="margin-bottom:3rem">
+    <h2 style="font-size:var(--step-4);margin:0 0 0.75rem">What this covers</h2>
+    <p>A manifest-based pack wraps plain Kubernetes YAML — CRDs, operators, policy, anything <code>kubectl apply</code> would take — so Palette can version it, template it, and roll it out through cluster profiles. No Helm chart required.</p>
+    <p>The path from a folder of YAML to a running workload crosses four systems. Each hand-off has its own address format, and they are not interchangeable — that is where most first attempts fail.</p>
+  </section>
+
+  <h2 style="font-size:var(--step-5);margin:0 0 1.25rem">How a pack reaches a cluster</h2>
+
+  <div class="flow" role="img" aria-label="Pipeline: YAML files become a pack directory, are archived and pushed to Artifactory, registered and synced into Palette, then deployed to a cluster.">
+    <svg viewBox="0 0 1040 130" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+        </marker>
+      </defs>
+      <g style="color:var(--muted)">
+        <line x1="196" y1="52" x2="238" y2="52" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/>
+        <line x1="436" y1="52" x2="478" y2="52" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/>
+        <line x1="676" y1="52" x2="718" y2="52" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/>
+      </g>
+
+      <g>
+        <rect x="8" y="20" width="188" height="64" rx="5" fill="var(--surface)" stroke="var(--rule)"/>
+        <text x="102" y="46" text-anchor="middle" font-family="Archivo, sans-serif" font-size="14" font-weight="600" fill="var(--ink)">Pack directory</text>
+        <text x="102" y="66" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">manifestify</text>
+        <text x="102" y="104" text-anchor="middle" font-family="Archivo, sans-serif" font-size="11" letter-spacing="0.08em" fill="var(--accent)">STEP 2</text>
+      </g>
+      <g>
+        <rect x="248" y="20" width="188" height="64" rx="5" fill="var(--surface)" stroke="var(--rule)"/>
+        <text x="342" y="46" text-anchor="middle" font-family="Archivo, sans-serif" font-size="14" font-weight="600" fill="var(--ink)">Artifactory</text>
+        <text x="342" y="66" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">oras push</text>
+        <text x="342" y="104" text-anchor="middle" font-family="Archivo, sans-serif" font-size="11" letter-spacing="0.08em" fill="var(--accent)">STEP 3</text>
+      </g>
+      <g>
+        <rect x="488" y="20" width="188" height="64" rx="5" fill="var(--surface)" stroke="var(--rule)"/>
+        <text x="582" y="46" text-anchor="middle" font-family="Archivo, sans-serif" font-size="14" font-weight="600" fill="var(--ink)">Palette registry</text>
+        <text x="582" y="66" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">terraform apply</text>
+        <text x="582" y="104" text-anchor="middle" font-family="Archivo, sans-serif" font-size="11" letter-spacing="0.08em" fill="var(--accent)">STEPS 4&ndash;5</text>
+      </g>
+      <g>
+        <rect x="728" y="20" width="188" height="64" rx="5" fill="var(--surface)" stroke="var(--rule)"/>
+        <text x="822" y="46" text-anchor="middle" font-family="Archivo, sans-serif" font-size="14" font-weight="600" fill="var(--ink)">Cluster</text>
+        <text x="822" y="66" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">add-on profile</text>
+        <text x="822" y="104" text-anchor="middle" font-family="Archivo, sans-serif" font-size="11" letter-spacing="0.08em" fill="var(--accent)">STEPS 6&ndash;7</text>
+      </g>
+    </svg>
+  </div>
+
+  <section class="measure" style="margin-bottom:1rem">
+    <h3 style="margin-top:2rem">Before you start</h3>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Requirement</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>bash</code> 4+</td><td>On macOS, invoke as <code>bash ./manifestify.sh</code>. The system <code>/bin/bash</code> is 3.2 and renders the colour codes as literal text.</td></tr>
+          <tr><td><code>oras</code></td><td>Any 1.x. Push and pull were verified with 1.0.0 and 1.3.3.</td></tr>
+          <tr><td><code>terraform</code></td><td>With the <code>spectrocloud/spectrocloud</code> provider.</td></tr>
+          <tr><td>Artifactory repo</td><td>A <strong>Docker</strong> or <strong>OCI</strong> local repository. A generic repo will not serve the V2 API.</td></tr>
+          <tr><td>Palette API key</td><td>Tenant-level. The registry resource is a tenant-scoped object.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ STEP 2 ============ -->
+  <section class="step" id="anatomy">
+    <div class="step-head">
+      <div class="step-num">01</div>
+      <h2>Anatomy of a manifest pack</h2>
+      <p class="step-note">What Palette actually consumes, and what each file is for.</p>
+    </div>
+    <div class="step-body">
+    <p class="measure">Where a Helm pack points at a chart, a manifest pack carries the YAML itself &mdash; anything <code>kubectl apply</code> would take. Palette adds versioning, templating, and lifecycle on top. A pack is four parts:</p>
+
+    <div class="code">
+      <div class="code-label">A complete pack, built from two source files</div>
+<pre>hello-app-1.0.0/
+├── manifests/
+│   ├── deployment.yaml   <span class="c"># your YAML, copied verbatim</span>
+│   └── namespace.yaml
+├── pack.json             <span class="c"># metadata + apply order</span>
+├── values.yaml           <span class="c"># the pack's public API</span>
+└── README.md             <span class="c"># shown in the Palette UI</span></pre>
+    </div>
+
+    <h3>manifests/ &mdash; your YAML, untouched</h3>
+    <p class="measure">Copied in verbatim, templating and all. Manifests are <strong>Go templates</strong>, rendered by Palette at deploy time. Plain YAML with no <code>{{ }}</code> works fine &mdash; templating is opt-in.</p>
+
+    <div class="code">
+      <div class="code-label tablist" role="tablist" aria-label="Manifest files">
+        <button type="button" role="tab" id="tab-dep" aria-controls="panel-dep" aria-selected="true">deployment.yaml</button>
+        <button type="button" role="tab" id="tab-ns" aria-controls="panel-ns" aria-selected="false" tabindex="-1">namespace.yaml</button>
+      </div>
+      <div id="panel-dep" role="tabpanel" aria-labelledby="tab-dep" tabindex="0">
+<pre>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+  namespace: <span class="s">"{{ .Values.namespace }}"</span>
+spec:
+  replicas: {{ .Values.replicas }}</pre>
+      </div>
+      <div id="panel-ns" role="tabpanel" aria-labelledby="tab-ns" tabindex="0" hidden>
+<pre>apiVersion: v1
+kind: Namespace
+metadata:
+  name: <span class="s">"{{ .Values.namespace }}"</span></pre>
+      </div>
+    </div>
+
+    <h3>pack.json &mdash; the metadata Palette indexes</h3>
+    <p class="measure"><code>kubeManifests</code> is the field that matters: it is both the file list and the <strong>apply order</strong>. Palette applies top to bottom, which is how CRDs land before the operator that needs them.</p>
+
+    <div class="code">
+      <div class="code-label">pack.json</div>
+<pre>{
+  <span class="k">"addonType"</span>: <span class="s">"app services"</span>,
+  <span class="k">"displayName"</span>: <span class="s">"Hello App"</span>,
+  <span class="k">"kubeManifests"</span>: [
+    <span class="s">"manifests/deployment.yaml"</span>,
+    <span class="s">"manifests/namespace.yaml"</span>
+  ],
+  <span class="k">"layer"</span>: <span class="s">"addon"</span>,
+  <span class="k">"name"</span>: <span class="s">"hello-app"</span>,
+  <span class="k">"version"</span>: <span class="s">"1.0.0"</span>
+}</pre>
+    </div>
+
+    <h3>values.yaml &mdash; the knobs users turn</h3>
+    <p class="measure">This is what someone edits in the profile builder. It is the pack's entire public API.</p>
+
+    <div class="code">
+      <div class="code-label">values.yaml</div>
+<pre>pack:
+  spectrocloud.com/display-name: Hello App
+  namespace: hello
+  content:
+    images:
+      - image: nginx:1.27
+
+manifests:
+  deployment:
+    namespace: <span class="s">"hello"</span>
+    replicas: 2
+  namespace:
+    namespace: <span class="s">"hello"</span></pre>
+    </div>
+
+    <p class="measure">Two halves. <code>pack:</code> holds pack-level settings, including <code>content.images</code> for airgap and Edge mirroring. <code>manifests:</code> holds one key per file, named after its basename.</p>
+
+    <div class="note">
+      <span class="note-label">Values are scoped per manifest</span>
+      <p>Values under a manifest's key belong to that manifest alone. That is why the deployment above writes <code>{{ .Values.namespace }}</code> and not <code>{{ .Values.manifests.deployment.namespace }}</code> &mdash; each file is rendered against its own block.</p>
+    </div>
+
+    <div class="note caution">
+      <span class="note-label">Every referenced value must exist</span>
+      <p>Rendering fails on a missing value. The deployment references both <code>{{ .Values.namespace }}</code> and <code>{{ .Values.replicas }}</code>, so both keys must appear under <code>deployment:</code>.</p>
+      <p><code>manifestify</code> auto-generates only <code>namespace</code>. The <code>replicas: 2</code> above was added by hand &mdash; every other parameter your manifests template is yours to add, and it is the step most easily forgotten.</p>
+    </div>
+
+    <h3>readinessCheck &mdash; gating on cluster state</h3>
+    <p class="measure">An optional top-level block, a sibling of <code>pack:</code> and <code>manifests:</code> rather than a child of either. It tells Palette to wait until a resource reports a given state before treating the pack as deployed, which is how you stop the next pack in a profile from starting too early.</p>
+
+    <div class="code">
+      <div class="code-label tablist" role="tablist" aria-label="Readiness check examples">
+        <button type="button" role="tab" id="tab-rc-crd" aria-controls="panel-rc-crd" aria-selected="true">CRD established</button>
+        <button type="button" role="tab" id="tab-rc-deploy" aria-controls="panel-rc-deploy" aria-selected="false" tabindex="-1">Deployment available</button>
+      </div>
+      <div id="panel-rc-crd" role="tabpanel" aria-labelledby="tab-rc-crd" tabindex="0">
+<pre>pack:
+  namespace: monitoring
+
+readinessCheck:                <span class="c"># top level, not under pack:</span>
+  v1beta1:
+    - name: <span class="s">"prometheuses-crd"</span>
+      kind: <span class="s">"CustomResourceDefinition"</span>
+      group: <span class="s">"apiextensions.k8s.io"</span>
+      version: <span class="s">"v1"</span>   <span class="c"># cluster-scoped, so no namespace</span>
+      keysToCheck:
+        - keyToCheck: <span class="s">"status.conditions[0].status"</span>
+          expectedValue: <span class="s">"True"</span>
+
+manifests:
+  crd-prometheuses: {}</pre>
+      </div>
+      <div id="panel-rc-deploy" role="tabpanel" aria-labelledby="tab-rc-deploy" tabindex="0" hidden>
+<pre>pack:
+  namespace: monitoring
+
+readinessCheck:
+  v1beta1:
+    - name: <span class="s">"prometheus-operator"</span>
+      namespace: <span class="s">"monitoring"</span>   <span class="c"># namespaced, so it is required</span>
+      kind: <span class="s">"Deployment"</span>
+      group: <span class="s">"apps"</span>
+      version: <span class="s">"v1"</span>
+      keysToCheck:
+        - keyToCheck: <span class="s">"status.availableReplicas"</span>
+          expectedValue: <span class="s">"1"</span>
+
+manifests:
+  operator: {}</pre>
+      </div>
+    </div>
+
+    <p class="measure">Add <code>namespace</code> to an entry when the kind is namespaced. Cluster-scoped kinds, CRDs among them, omit it.</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>name</code></td><td>Label for the check, and the resource name to look up</td></tr>
+          <tr><td><code>kind</code> / <code>group</code> / <code>version</code></td><td>Identify the resource type, e.g. <code>CephCluster</code> / <code>ceph.rook.io</code> / <code>v1</code></td></tr>
+          <tr><td><code>namespace</code></td><td>Only for namespaced kinds</td></tr>
+          <tr><td><code>keysToCheck</code></td><td>A <strong>list</strong> of <code>keyToCheck</code> and <code>expectedValue</code> pairs, so one resource can assert several conditions</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="note-label">keysToCheck is a list</span>
+      <p>The pair goes inside a <code>keysToCheck</code> entry, not flat alongside <code>kind</code> and <code>group</code>. A flat <code>keyToCheck</code> / <code>expectedValue</code> at the item level is a common mistake and will not match.</p>
+    </div>
+
+    <div class="note caution">
+      <span class="note-label">Undocumented field</span>
+      <p><code>readinessCheck</code> appears in neither the pack.json JSON schema nor the pack-constraints reference. The shape above is taken from a live cluster's Pack custom resource, so treat the field names as observed rather than specified, and confirm with Spectro Cloud before relying on it in production.</p>
+    </div>
+
+    <h3>How it renders</h3>
+    <p class="measure">At deploy time Palette takes each manifest, renders it against its own block from <code>values.yaml</code>, and applies the results in <code>kubeManifests</code> order. So <code>namespace: "{{ .Values.namespace }}"</code> becomes <code>namespace: "hello"</code> on the cluster.</p>
+    </div>
+  </section>
+
+  <section class="step" id="build">
+    <div class="step-head">
+      <div class="step-num">02</div>
+      <h2>Build the pack</h2>
+      <p class="step-note">Turn a directory of Kubernetes YAML into the four files Palette expects.</p>
+    </div>
+    <div class="step-body">
+
+      <p>Palette requires a specific shape: a <code>manifests/</code> directory, a <code>pack.json</code> listing every file under <code>kubeManifests</code>, and a <code>values.yaml</code> exposing per-manifest parameters. <code>manifestify.sh</code> assembles all of it.</p>
+
+      <div class="code">
+        <div class="code-label">Build</div>
+<pre>bash manifestify.sh \
+  <span class="k">-n</span> prometheus-operator-crds \
+  <span class="k">-v</span> 0.76.2 \
+  <span class="k">-p</span> addon \
+  <span class="k">-a</span> monitoring \
+  <span class="k">-s</span> monitoring \
+  <span class="k">-m</span> .manifests/crd \
+  <span class="k">-d</span> <span class="s">"Prometheus Operator CRDs"</span> \
+  <span class="k">-r</span> .manifests/pack-readme.md</pre>
+      </div>
+
+      <p>The result is <code>./prometheus-operator-crds-0.76.2/</code>:</p>
+
+      <div class="code">
+        <div class="code-label">Output</div>
+<pre>prometheus-operator-crds-0.76.2/
+├── manifests/          <span class="c"># your YAML, copied verbatim</span>
+├── pack.json           <span class="c"># kubeManifests list + layer metadata</span>
+├── values.yaml         <span class="c"># per-manifest parameters</span>
+└── README.md           <span class="c"># from -r, or a generated stub</span></pre>
+      </div>
+
+      <h4>Flags that matter</h4>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Flag</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td><code>-m</code></td><td>A file or a directory. Repeatable. Directories are <strong>not</strong> searched recursively — point at the exact folder holding the YAML.</td></tr>
+            <tr><td><code>-f</code></td><td>A text file listing manifest paths, one per line. Use this when apply order matters.</td></tr>
+            <tr><td><code>-r</code></td><td>The pack's README. Without it a stub is generated; a <code>README.md</code> in your working directory is never picked up by accident.</td></tr>
+            <tr><td><code>-z</code></td><td>Also produce <code>&lt;name&gt;-&lt;version&gt;.tar.gz</code>, ready to push by hand.</td></tr>
+            <tr><td><code>-F</code></td><td>Overwrite an existing pack directory. Preserves a <code>logo.png</code> or hand-edited <code>README.md</code> already inside it.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="note-label">Manifest names come from filenames</span>
+        <p>Each file becomes a key under <code>manifests:</code> in <code>values.yaml</code>, named after its basename. Two files called <code>config.yaml</code> in different source folders will collide, and the build stops with a duplicate-name error. Rename one, or pass files individually.</p>
+      </div>
+
+      <div class="note">
+        <span class="note-label">Namespace values</span>
+        <p>A <code>namespace</code> value is emitted only for manifests that actually template <code>{{ .Values.namespace }}</code>. Cluster-scoped resources such as CRDs get <code>{}</code> instead, so the key is present without a misleading value. Pass <code>-N</code> to suppress it everywhere.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ STEP 3 ============ -->
+  <section class="step" id="push">
+    <div class="step-head">
+      <div class="step-num">03</div>
+      <h2>Push to Artifactory</h2>
+      <p class="step-note">Archive the pack and push it as an OCI artifact under the path Palette looks in.</p>
+    </div>
+    <div class="step-body">
+
+      <p>Palette expects a gzipped tarball, tagged with the version, under a <code>spectro-packs/archive</code> path. The <code>spectro</code> CLI is deprecated; <a href="https://oras.land">oras</a> is the supported route.</p>
+
+      <div class="code">
+        <div class="code-label">Build and push in one command</div>
+<pre>bash manifestify.sh \
+  <span class="k">-n</span> prometheus-operator-crds \
+  <span class="k">-v</span> 0.76.2 \
+  <span class="k">-p</span> addon \
+  <span class="k">-a</span> monitoring \
+  <span class="k">-s</span> monitoring \
+  <span class="k">-m</span> .manifests/crd \
+  <span class="k">-d</span> <span class="s">"Prometheus Operator CRDs"</span> \
+  <span class="k">-r</span> .manifests/pack-readme.md \
+  <span class="k">-R</span> artifactory.teams.jfrog.com/jarvis-pack-manifests/pavan-packs \
+  <span class="k">-L</span> <span class="k">-P</span></pre>
+      </div>
+
+      <p><code>-L</code> runs <code>oras login</code>, <code>-P</code> archives and pushes. Doing it by hand is three commands:</p>
+
+      <div class="code">
+        <div class="code-label">Manual equivalent</div>
+<pre>oras login artifactory.example.com
+
+<span class="c"># archive from the parent, so the pack directory is the tarball root</span>
+tar -czvf prometheus-operator-crds-0.76.2.tar.gz prometheus-operator-crds-0.76.2
+
+oras push --image-spec v1.0 \
+  artifactory.example.com/my-repo/my-packs/spectro-packs/archive/prometheus-operator-crds:0.76.2 \
+  prometheus-operator-crds-0.76.2.tar.gz</pre>
+      </div>
+
+      <h4>Two addresses, one registry</h4>
+      <p>This is the most common source of confusion. The address you <em>push</em> to is not the endpoint you give Palette.</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Used by</th><th>Address</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>oras</strong> — pushing</td>
+              <td><code>artifactory.example.com/my-repo/my-packs</code></td>
+            </tr>
+            <tr>
+              <td><strong>Palette</strong> — reading</td>
+              <td><code>https://artifactory.example.com</code> + suffix <code>/artifactory/api/docker/my-repo</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>oras is a Docker V2 client and always requests <code>/v2/&lt;repo&gt;/…</code>. Artifactory's <code>/artifactory/api/docker/&lt;repo&gt;/</code> path is a server-side endpoint that Palette uses over plain HTTP. Both reach the same artifact; neither works in the other's position.</p>
+
+      <div class="note caution">
+        <span class="note-label">Never re-push a version</span>
+        <p>Palette caches the manifest digest it saw when it synced the registry. Re-pushing the same tag moves it to a new digest and leaves Palette requesting one that no longer exists — cluster reconciles then fail with <code>not found</code> in a loop.</p>
+        <p>Gzip embeds a timestamp, so even rebuilding <em>identical</em> content produces a different digest. Treat a pushed version as immutable and bump the version instead.</p>
+      </div>
+
+      <h4>What it looks like in Artifactory</h4>
+      <p>After a successful push, the repository browser shows the pack nested under the path Palette expects. Every segment comes from somewhere specific:</p>
+
+      <div class="code">
+        <div class="code-label">Repository browser &mdash; jarvis-pack-manifests</div>
+<pre>jarvis-pack-manifests            <span class="c">&larr; repository key</span>
+├── .jfrog                       <span class="c">  Artifactory internal</span>
+└── pavan-packs                  <span class="c">&larr; base_content_path</span>
+    └── spectro-packs            <span class="c">&larr; Palette convention</span>
+        └── archive
+            └── prometheus-operator-crds   <span class="c">&larr; pack name</span>
+                ├── 0.76.1       <span class="c">&larr; tag = pack version</span>
+                ├── 0.76.2
+                └── _uploads     <span class="c">  Artifactory staging</span></pre>
+      </div>
+
+      <p>One tag per pushed version, side by side. This is the immutability rule made visible: <code>0.76.1</code> and <code>0.76.2</code> coexist rather than one replacing the other.</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Repository setting</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Package Type</td><td><code>OCI</code> &mdash; a Docker or generic repo will not serve the V2 API</td></tr>
+            <tr><td>Repository Layout</td><td><code>simple-default</code></td></tr>
+            <tr><td>File URL</td><td><code>https://artifactory.teams.jfrog.com/artifactory/jarvis-pack-manifests/</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note good">
+        <span class="note-label">Cross-check against Terraform</span>
+        <p>The tree confirms the registry fields in step 04. <code>pavan-packs</code> is the <code>base_content_path</code>, and <code>spectro-packs</code> is absent from every Terraform field because Palette appends it when reading.</p>
+      </div>
+
+      <h4>Verify before moving on</h4>
+      <div class="code">
+        <div class="code-label">Confirm the artifact landed</div>
+<pre>REPO=artifactory.example.com/my-repo/my-packs/spectro-packs/archive/prometheus-operator-crds
+
+oras repo tags <span class="s">$REPO</span>
+oras manifest fetch --descriptor <span class="s">$REPO</span>:0.76.2</pre>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ STEP 4 ============ -->
+  <section class="step" id="register">
+    <div class="step-head">
+      <div class="step-num">04</div>
+      <h2>Register in Palette</h2>
+      <p class="step-note">Create the OCI pack registry with the <code>spectrocloud_registry_oci</code> resource.</p>
+    </div>
+    <div class="step-body">
+
+      <div class="code">
+        <div class="code-label">registry.tf</div>
+<pre><span class="k">resource</span> <span class="s">"spectrocloud_registry_oci"</span> <span class="s">"packs"</span> {
+  name       = <span class="s">"customer-pack-registry"</span>
+  type       = <span class="s">"basic"</span>
+  endpoint   = <span class="s">"https://artifactory.example.com"</span>
+  is_private = <span class="k">true</span>
+
+  <span class="c"># JFrog serves its Docker V2 API under a per-repo path</span>
+  endpoint_suffix = <span class="s">"/artifactory/api/docker/my-repo"</span>
+
+  <span class="c"># directory inside the repo holding the packs; "" for the repo root</span>
+  base_content_path = <span class="s">"my-packs"</span>
+
+  provider_type      = <span class="s">"pack"</span>
+  is_synchronization = <span class="k">true</span>
+
+  credentials {
+    credential_type = <span class="s">"basic"</span>
+    username        = <span class="k">var</span>.artifactory_user
+    password        = <span class="k">var</span>.artifactory_token
+  }
+}</pre>
+      </div>
+
+      <h4>Field by field</h4>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Field</th><th>Value</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td><code>type</code></td><td><code>basic</code></td><td>Anything that is not ECR. Artifactory, Harbor, GitLab.</td></tr>
+            <tr><td><code>provider_type</code></td><td><code>pack</code></td><td>Defaults to <code>helm</code>. Packs will not appear without this.</td></tr>
+            <tr><td><code>is_synchronization</code></td><td><code>true</code></td><td><strong>Mandatory</strong> when <code>provider_type = "pack"</code>.</td></tr>
+            <tr><td><code>base_content_path</code></td><td>directory</td><td><strong>Required</strong> whenever sync is on.</td></tr>
+            <tr><td><code>endpoint_suffix</code></td><td>API path</td><td>Appended to <code>endpoint</code>. JFrog-specific.</td></tr>
+            <tr><td><code>credential_type</code></td><td><code>basic</code></td><td>Also accepts <code>secret</code>, <code>sts</code>, <code>noAuth</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note caution">
+        <span class="note-label">Two provider validations will stop your apply</span>
+        <p><code>provider_type = "pack"</code> with <code>is_synchronization = false</code> is rejected outright. So is <code>is_synchronization = true</code> without a <code>base_content_path</code>.</p>
+        <p>Synchronization also cannot be turned off later — the provider blocks changing it from <code>true</code> to <code>false</code> as a day-2 operation.</p>
+      </div>
+
+      <div class="note">
+        <span class="note-label">Do not include spectro-packs</span>
+        <p>Palette appends <code>spectro-packs</code> itself. It belongs in your <code>oras push</code> target, never in <code>endpoint</code>, <code>endpoint_suffix</code>, or <code>base_content_path</code>.</p>
+      </div>
+
+      <p>Use an Artifactory identity token rather than an account password — Artifactory rejects passwords when SSO is enabled.</p>
+
+      <div class="code">
+        <div class="code-label">Apply</div>
+<pre>terraform init
+terraform apply</pre>
+      </div>
+
+      <p>Self-signed certificate? Add a <code>tls_config</code> block inside <code>credentials</code> with a <code>certificate</code>. <code>insecure_skip_verify = true</code> exists but disables verification entirely — keep it out of customer environments.</p>
+
+    </div>
+  </section>
+
+  <!-- ============ STEP 5 ============ -->
+  <section class="step" id="sync">
+    <div class="step-head">
+      <div class="step-num">05</div>
+      <h2>Sync and verify</h2>
+      <p class="step-note">Palette reads the registry and indexes every pack it finds.</p>
+    </div>
+    <div class="step-body">
+
+      <p>With <code>is_synchronization = true</code>, Palette syncs on creation and on a schedule after that. It walks <code>base_content_path</code>, finds <code>spectro-packs/archive</code>, and registers each tag as a pack version.</p>
+
+      <div class="note caution">
+        <span class="note-label">wait_for_sync does not apply here</span>
+        <p>The provider's <code>wait_for_sync</code> argument only takes effect for <code>provider_type</code> of <code>helm</code> or <code>zarf</code> — not <code>pack</code>. Terraform will return before the first sync finishes, so verify in the UI or by data source rather than assuming <code>apply</code> completing means the pack is available.</p>
+      </div>
+
+      <h4>Confirm the pack is indexed</h4>
+      <div class="code">
+        <div class="code-label">registry-lookup.tf</div>
+<pre><span class="k">data</span> <span class="s">"spectrocloud_registry_pack"</span> <span class="s">"packs"</span> {
+  name = <span class="s">"customer-pack-registry"</span>
+}
+
+<span class="k">data</span> <span class="s">"spectrocloud_pack"</span> <span class="s">"crds"</span> {
+  name         = <span class="s">"prometheus-operator-crds"</span>
+  version      = <span class="s">"0.76.2"</span>
+  registry_uid = <span class="k">data</span>.spectrocloud_registry_pack.packs.id
+}
+
+<span class="k">output</span> <span class="s">"pack_uid"</span> {
+  value = <span class="k">data</span>.spectrocloud_pack.crds.id
+}</pre>
+      </div>
+
+      <div class="note caution">
+        <span class="note-label">Do not set type = "manifest"</span>
+        <p><code>type</code> accepts <code>manifest</code>, but the provider short-circuits that case and returns without performing any lookup, leaving every attribute null. The failure surfaces much later as <code>The argument "pack.0.name" is required</code> on the cluster profile, pointing at the wrong file.</p>
+        <p>Name, version, and <code>registry_uid</code> identify the pack on their own.</p>
+      </div>
+
+      <p>A UID in the output means Palette has indexed the pack and it is ready to reference. An empty result means sync has not completed or has not found the artifact.</p>
+
+      <div class="note good">
+        <span class="note-label">Sync troubleshooting</span>
+        <p><strong>Registry connects but no packs appear</strong> — <code>base_content_path</code> is wrong. Palette syncs only at that exact directory level: not the repo root, not nested children.</p>
+        <p><strong>Packs appear under the wrong type</strong> — <code>provider_type</code> is still <code>helm</code>.</p>
+        <p><strong>Authentication failures</strong> — the token lacks read access to the repository, or SSO is rejecting a password.</p>
+      </div>
+
+      <p>You can also confirm in the UI under <strong>Tenant Settings &rarr; Registries</strong>, which shows sync status and the last sync time.</p>
+
+    </div>
+  </section>
+
+  <!-- ============ STEP 6 ============ -->
+  <section class="step" id="profile">
+    <div class="step-head">
+      <div class="step-num">06</div>
+      <h2>Create the profile</h2>
+      <p class="step-note">Wrap the pack in an add-on cluster profile.</p>
+    </div>
+    <div class="step-body">
+
+      <p>Packs reach clusters through profiles. For something added to existing clusters, that means an <strong>add-on</strong> profile.</p>
+
+      <div class="code">
+        <div class="code-label">profile.tf</div>
+<pre><span class="k">resource</span> <span class="s">"spectrocloud_cluster_profile"</span> <span class="s">"crds"</span> {
+  name        = <span class="s">"prometheus-operator-crds"</span>
+  description = <span class="s">"Prometheus Operator CRDs"</span>
+  type        = <span class="s">"add-on"</span>
+  cloud       = <span class="s">"all"</span>
+  version     = <span class="s">"1.0.0"</span>
+
+  pack {
+    name   = <span class="k">data</span>.spectrocloud_pack.crds.name
+    tag    = <span class="k">data</span>.spectrocloud_pack.crds.version
+    uid    = <span class="k">data</span>.spectrocloud_pack.crds.id
+    values = <span class="k">data</span>.spectrocloud_pack.crds.values
+  }
+}</pre>
+      </div>
+
+      <p>Taking <code>values</code> straight from the data source uses the pack's defaults. To override a parameter, supply your own YAML instead — the structure mirrors the <code>values.yaml</code> from step 2:</p>
+
+      <div class="code">
+        <div class="code-label">Overriding values</div>
+<pre>  pack {
+    name   = <span class="k">data</span>.spectrocloud_pack.crds.name
+    tag    = <span class="k">data</span>.spectrocloud_pack.crds.version
+    uid    = <span class="k">data</span>.spectrocloud_pack.crds.id
+    values = &lt;&lt;-EOT
+      pack:
+        namespace: monitoring
+      manifests:
+        crd-prometheuses: {}
+        crd-servicemonitors: {}
+    EOT
+  }</pre>
+      </div>
+
+      <p>Profiles are versioned in their own right. Publishing a new pack version means bumping the profile <code>version</code> too, which is what gives you a rollback point.</p>
+
+    </div>
+  </section>
+
+  <!-- ============ STEP 7 ============ -->
+  <section class="step" id="attach">
+    <div class="step-head">
+      <div class="step-num">07</div>
+      <h2>Attach to a cluster</h2>
+      <p class="step-note">Deploy the add-on profile onto a running cluster.</p>
+    </div>
+    <div class="step-body">
+
+      <div class="code">
+        <div class="code-label">deploy.tf</div>
+<pre><span class="k">resource</span> <span class="s">"spectrocloud_addon_deployment"</span> <span class="s">"crds"</span> {
+  cluster_uid = <span class="k">var</span>.cluster_uid
+  context     = <span class="s">"project"</span>
+
+  cluster_profile {
+    id = <span class="k">resource</span>.spectrocloud_cluster_profile.crds.id
+  }
+}</pre>
+      </div>
+
+      <p>On apply, Palette's cluster agent pulls the artifact from Artifactory by digest, unpacks the tarball, renders each manifest through the values, and applies them in <code>kubeManifests</code> order.</p>
+
+      <h4>Confirm the rollout</h4>
+      <div class="code">
+        <div class="code-label">On the cluster</div>
+<pre>kubectl get crd | grep monitoring.coreos.com
+
+<span class="c"># watch the agent do the work</span>
+kubectl logs -n cluster-&lt;uid&gt; deploy/palette-manager -f</pre>
+      </div>
+
+      <div class="note caution">
+        <span class="note-label">If the agent logs "not found"</span>
+        <p>A <code>failed to download pack … not found</code> loop means Palette is requesting a digest the registry no longer has — the symptom of a re-pushed tag described in step 3. Push a new version, update the profile to reference it, and re-apply. Re-syncing the registry alone will not clear it, because the profile also holds the stale reference.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ DEMO ============ -->
+  <section class="step" id="demo">
+    <div class="step-head">
+      <div class="step-num">&#9654;</div>
+      <h2>Demo script</h2>
+      <p class="step-note">A 20-minute walkthrough. Everything past step 3 is pre-staged.</p>
+    </div>
+    <div class="step-body">
+
+      <p>Have the registry, profile, and a running cluster already in place. Demonstrate the parts that are fast and visual; do not wait on a sync in front of an audience.</p>
+
+      <dl class="timing">
+        <dt>0:00</dt>
+        <dd>Show the raw YAML. Ordinary CRDs, nothing Palette-specific — the point is that no chart is needed.</dd>
+
+        <dt>2:00</dt>
+        <dd>Run <code>manifestify.sh</code>. Sub-second. Open the generated <code>pack.json</code> and <code>values.yaml</code> and show that manifest keys map to filenames.</dd>
+
+        <dt>5:00</dt>
+        <dd>Push with <code>-L -P</code>. Show the size drop — a 4.3&nbsp;MB CRD set compresses to about 455&nbsp;KB. Confirm with <code>oras repo tags</code>.</dd>
+
+        <dt>8:00</dt>
+        <dd>Switch to Artifactory in a browser. Show the artifact under <code>spectro-packs/archive</code>. This is the moment the two-address distinction lands.</dd>
+
+        <dt>11:00</dt>
+        <dd>Show <code>registry.tf</code> and the Palette registry already synced. Call out <code>provider_type = "pack"</code> as the field everyone misses.</dd>
+
+        <dt>14:00</dt>
+        <dd>Show the pack in the profile builder, rendered values and all — the pack is now indistinguishable from a Spectro-published one.</dd>
+
+        <dt>17:00</dt>
+        <dd><code>terraform apply</code> the add-on deployment against the live cluster. Tail the agent log, then <code>kubectl get crd</code>.</dd>
+      </dl>
+
+      <div class="note">
+        <span class="note-label">Have a fallback</span>
+        <p>Pre-push a second version — <code>0.76.3</code>, say — before the session. If a live push fails on network or auth, switch to the pre-staged version and keep moving rather than debugging in front of the room.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ REFERENCE ============ -->
+  <section class="step" id="reference">
+    <div class="step-head">
+      <div class="step-num">&#167;</div>
+      <h2>Quick reference</h2>
+      <p class="step-note">Every address and constraint in one place.</p>
+    </div>
+    <div class="step-body">
+
+      <h4>Address formats</h4>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Purpose</th><th>Format</th></tr></thead>
+          <tbody>
+            <tr><td>oras login</td><td><code>artifactory.example.com</code></td></tr>
+            <tr><td>oras push target</td><td><code>artifactory.example.com/my-repo/my-packs/spectro-packs/archive/&lt;name&gt;:&lt;version&gt;</code></td></tr>
+            <tr><td><code>-R</code> flag</td><td><code>artifactory.example.com/my-repo/my-packs</code></td></tr>
+            <tr><td>TF <code>endpoint</code></td><td><code>https://artifactory.example.com</code></td></tr>
+            <tr><td>TF <code>endpoint_suffix</code></td><td><code>/artifactory/api/docker/my-repo</code></td></tr>
+            <tr><td>TF <code>base_content_path</code></td><td><code>my-packs</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Rules that bite</h4>
+      <ul>
+        <li>A pushed pack version is <strong>immutable</strong>. Bump, never overwrite.</li>
+        <li><code>provider_type = "pack"</code> <strong>requires</strong> <code>is_synchronization = true</code>.</li>
+        <li><code>is_synchronization = true</code> <strong>requires</strong> <code>base_content_path</code>.</li>
+        <li>Synchronization cannot be disabled after creation.</li>
+        <li><code>wait_for_sync</code> is ignored for pack registries.</li>
+        <li>Manifest basenames must be unique within a pack.</li>
+        <li>Directory collection is not recursive.</li>
+        <li><code>spectro-packs</code> goes in the push path, never in the Terraform fields.</li>
+      </ul>
+
+      <h4>Links</h4>
+      <ul>
+        <li><a href="https://docs.spectrocloud.com/registries-and-packs/adding-add-on-packs/">Adding add-on packs</a> — manifest pack structure</li>
+        <li><a href="https://docs.spectrocloud.com/registries-and-packs/registries/oci-registry/add-pack-oci/add-pack-oci-basic/">Add a pack to a basic OCI registry</a> — the oras flow</li>
+        <li><a href="https://registry.terraform.io/providers/spectrocloud/spectrocloud/latest/docs/resources/registry_oci">spectrocloud_registry_oci</a> — full resource schema</li>
+        <li><a href="https://registry.terraform.io/providers/spectrocloud/spectrocloud/latest/docs/resources/addon_deployment">spectrocloud_addon_deployment</a> — attaching profiles</li>
+      </ul>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Addresses throughout use <code>artifactory.example.com/my-repo/my-packs</code> as a stand-in — substitute your own host, repository key, and content path. Every command and Terraform field was verified against the provider source and a live OCI registry; the JFrog-specific address forms and Palette's ingestion of the resulting artifact were not exercised end to end and should be confirmed in your environment first.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    document.querySelectorAll('[role="tablist"]').forEach(function (list) {
+      var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+
+      function select(tab) {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+          document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+        });
+      }
+
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () { select(tab); });
+        tab.addEventListener('keydown', function (e) {
+          var next = null;
+          if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+          if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+          if (e.key === 'Home') next = tabs[0];
+          if (e.key === 'End') next = tabs[tabs.length - 1];
+          if (next) { e.preventDefault(); select(next); next.focus(); }
+        });
+      });
+    });
+  })();
+</script>
